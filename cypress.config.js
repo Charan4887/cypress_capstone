@@ -7,7 +7,7 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here
-      return getCompareSnapshotsPlugin(on, config);
+      // return getCompareSnapshotsPlugin(on, config);
       Mochawesome(on);
     },
     reporter: 'cypress-mochawesome-reporter',
