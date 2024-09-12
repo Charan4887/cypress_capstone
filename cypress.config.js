@@ -1,27 +1,22 @@
-const { defineConfig } = require("cypress");
-const getCompareSnapshotsPlugin = require('cypress-image-diff-js/plugin');
-const Mochawesome = require('cypress-mochawesome-reporter/plugin');
-
+const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
+  reporter: 'cypress-mochawesome-reporter',
+  reporterOptions: {
+    reportDir: 'cypress/reports',
+    overwrite: true,
+    html: true,   // Enable HTML report generation
+  },
   e2e: {
     setupNodeEvents(on, config) {
-      // implement node event listeners here
-      // return getCompareSnapshotsPlugin(on, config);
-      Mochawesome(on);
-    },
-    reporter: 'cypress-mochawesome-reporter',
-    reporterOptions: {
-      reportDir: 'cypress/reports/mochawesome-report',
-      reportFilename: 'report',
-      quiet: true,
-      overwrite: false,
-      html: true,
-      json: true
-    },
+      require('cypress-image-diff-js/plugin')(on,config)
+      require('cypress-mochawesome-reporter/plugin')(on)
+    }
   },
-  
+  retries:2,
+  pageLoadTimeout: 60000, // increase timeout to 120 seconds
+  viewportWidth: 1036,
+  viewportHeight: 960,
   video:true,
-  screenshotOnRunFailure:true,
-  retries:2
-});
+  screenshotOnRunFailure:true
+})
