@@ -5,7 +5,7 @@ module.exports = defineConfig({
   reporterOptions: {
     reportDir: 'cypress/reports',
     overwrite: true,
-    html: true,   // Enable HTML report generation
+    html: true,   
   },
   e2e: {
     setupNodeEvents(on, config) {
@@ -14,9 +14,6 @@ module.exports = defineConfig({
     }
   },
   retries:2,
-  pageLoadTimeout: 60000, // increase timeout to 120 seconds
-  viewportWidth: 1036,
-  viewportHeight: 960,
   video:true,
   screenshotOnRunFailure:true
 })
